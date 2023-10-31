@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html>
+  
+<head>
+    <title>Calculator</title>
+  
+    <style>
+        h1{
+            text-align: center;
+            font-size: 50px;
+            color: aqua;
+        }
+        table {
+           
+            margin-left: auto;
+            margin-right: auto;
+        }
+          
+        input[type="button"] {
+            width: 100%;
+            padding: 15px 10px;
+            font-size: 24px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+          
+        input[type="text"] {
+            padding: 15px 10px;
+            font-size: 30px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+        .ope{
+            background-color: black;
+            color: white;
+        }
+        #clear{
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+  
+<body>
+    <h1>Masai Calculator</h1>
+    <table id="calcu">
+        <tr>
+            <td colspan="4">
+                <input type="text" id="result" disabled>
+            </td>
+            
+        </tr>
+  
+        <tr>
+            <td><input type="button" value="1" class="num"></td>
+            <td><input type="button" value="2" class="num"></td>
+            <td><input type="button" value="3" class="num"></td>
+            <td><input type="button" value="+" class="ope"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="4" class="num"></td>
+            <td><input type="button" value="5" class="num"></td>
+            <td><input type="button" value="6" class="num"></td>
+            <td><input  type="button" value="-" class="ope"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="7" class="num"></td>
+            <td><input type="button" value="8" class="num"></td>
+            <td><input type="button" value="9" class="num"></td>
+            <td><input  type="button" value="*" class="ope"></td>
+        </tr>
+        <tr>
+            <td><input  type="button" value="C" id="clear"></td>
+            <td><input  type="button" value="0" class="num"></td>
+            <td><input   type="button" value="=" id="equal"></td>
+            <td><input   type="button" value="/" class="ope"></td>
+        </tr>
+    </table>
+</body>
+</html> 
+
+<script>
+
+    let num = document.querySelectorAll(".num")
+    let ope = document.querySelectorAll(".ope")
+   let head = document.getElementById("result")
+   let equal = document.getElementById("equal")
+   let clear = document.getElementById("clear")
+
+   let opt="";
+
+   isnumber = true;
+
+   let firstnum = "";
+   let secondnum = "";
+
+   equal.addEventListener('click',function(){
+
+    head.value = calculate(firstnum,secondnum,opt)
+
+
+   })
+
+
+
+   for(let i=0; i<num.length; i++)
+   {
+   
+    num[i].addEventListener('click',function(){
+           
+        if(isnumber==true)
+        {
+            firstnum+=num[i].value
+
+              head.value=firstnum
+        }
+        else{
+            secondnum+=num[i].value
+
+              head.value=secondnum
+          }
+       
+        
+    })
+   }
+    
+   for(let i=0; i<ope.length; i++){
+    ope[i].addEventListener('click',function(){
+
+         isnumber = false ;
+         opt=ope[i].value
+        
+    })
+   }
+
+   function calculate(firstnum,secondnum,opt){
+    switch(opt)
+    {
+        case "+" :
+            return Number(firstnum) + Number(secondnum) ;
+            case "-" :
+            return Number(firstnum) - Number(secondnum) ;
+            case "*" :
+            return Number(firstnum) * Number(secondnum)  ;
+            case "/" :
+            return Number(firstnum) / Number(secondnum)  ;
+    }
+   }
+
+   clear.addEventListener('click',function(){
+
+    head.value = ""
+
+
+   })
+
+</script>
